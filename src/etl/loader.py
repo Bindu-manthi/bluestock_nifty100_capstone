@@ -1,8 +1,8 @@
 import pandas as pd
 
 df = pd.read_excel(
-    "data/raw/companies.xlsx",
-    skiprows=1
+    "data/raw/stock_prices.xlsx"
 )
 
-print(df["id"].tail(20))
+print(df.columns.tolist())
+print(df.head())
