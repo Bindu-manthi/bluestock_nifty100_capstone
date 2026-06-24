@@ -1,0 +1,29 @@
+check_name,result
+
+DQ-04 Null Value Check,Completed
+companies_nulls,9
+profitandloss_nulls,231
+balancesheet_nulls,0
+cashflow_nulls,8
+analysis_nulls,0
+documents_nulls,52
+prosandcons_nulls,6
+financial_ratios_nulls,170
+peer_groups_nulls,0
+sectors_nulls,0
+stock_prices_nulls,0
+
+DQ-05 Negative Value Check,Completed
+profitandloss_negative_values,603
+balancesheet_negative_values,7
+cashflow_negative_values,2465
+financial_ratios_negative_values,889
+stock_prices_negative_values,0
+
+DQ-06 Data Type Validation,Passed
+
+DQ-07 Range Validation,Passed
+Invalid Stock Prices,0
+
+DQ-08 Date Validation,Passed
+Invalid Dates,0
