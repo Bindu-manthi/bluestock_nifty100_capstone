@@ -109,28 +109,27 @@ def apply_filters(df, filters):
 
     return filtered
 
+def run_preset(df, config, preset_name):
+
+    if preset_name not in config:
+        raise ValueError(f"Preset '{preset_name}' not found.")
+
+    filters = config[preset_name]
+
+    result = apply_filters(df, filters)
+
+    return result
+
 
 if __name__ == "__main__":
+
     df = load_ratios()
     config = load_config()
 
-    result = apply_filters(
-        df,
-        config["quality_compounder"]
-    )
+    print("\n========== PRESET TEST RESULTS ==========\n")
 
-    print(
-    result[
-        [
-            "company_id",
-            "year",
-            "return_on_equity_pct",
-            "roce_percentage",
-            "debt_to_equity",
-            "composite_quality_score"
-        ]
-    ].head(10)
-)
+    for preset in config.keys():
 
-    print(f"\nCompanies Found: {len(result)}")
-    print(f"\nCompanies Found: {len(result)}")
+        result = run_preset(df, config, preset)
+
+        print(f"{preset:<25} {len(result)} companies")
