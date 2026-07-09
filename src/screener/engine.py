@@ -3,6 +3,7 @@ import pandas as pd
 import yaml
 from pathlib import Path
 import numpy as np
+from export import export_screeners
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATABASE = PROJECT_ROOT / "db" / "nifty100.db"
@@ -126,10 +127,16 @@ if __name__ == "__main__":
     df = load_ratios()
     config = load_config()
 
+    all_results = {}
+
     print("\n========== PRESET TEST RESULTS ==========\n")
 
     for preset in config.keys():
 
         result = run_preset(df, config, preset)
 
+        all_results[preset] = result
+
         print(f"{preset:<25} {len(result)} companies")
+
+    export_screeners(all_results)
