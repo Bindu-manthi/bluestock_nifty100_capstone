@@ -1,274 +1,206 @@
-# Nifty 100 Financial Analytics Capstone
+# Nifty100 Financial Analytics & Stock Screener
 
-## Project Overview
+## Overview
 
-This project is a Financial Analytics Engine built using Python and SQLite to analyze financial statements of Nifty 100 companies. The project performs ETL, data validation, financial ratio calculations, CAGR analysis, cash flow analytics, and edge case validation.
+This project is a financial analytics platform for Nifty 100 companies. It extracts, processes, and analyzes company financial data to generate key financial ratios, stock screeners, peer comparisons, and visual reports.
 
-The project is divided into multiple sprints. Sprint 1 focuses on building the data foundation, while Sprint 2 develops the Financial Ratio Engine.
-
----
-
-# Technologies Used
-
-- Python 3
-- SQLite
-- Pandas
-- NumPy
-- Pytest
-- SQL
-- VS Code
-- Git & GitHub
+The project is implemented in multiple sprints, with each sprint adding new analytical capabilities and reporting features.
 
 ---
 
-# Project Structure
+## Sprint Progress
+
+### Sprint 1 – Data Foundation
+
+* Project structure and environment setup
+* Data ingestion and normalization
+* SQLite database creation
+* Data validation pipeline
+* ETL workflow
+
+### Sprint 2 – Financial Ratio Engine
+
+* Profitability ratios
+* Leverage ratios
+* Efficiency ratios
+* CAGR calculations
+* Cash Flow KPIs
+* Financial ratio population
+* Edge case validation
+* Unit testing
+
+### Sprint 3 – Screener & Peer Engine
+
+* Configurable stock screener
+* Six preset screeners
+* Composite quality scoring
+* Excel screener export
+* Peer percentile ranking engine
+* SQLite peer percentile storage
+* Radar chart generation
+* Peer comparison Excel report
+
+---
+
+## Project Structure
 
 ```text
 nifty100_capstone/
 │
-├── data/
+├── config/
+│   └── screener_config.yaml
+│
 ├── db/
 │   └── nifty100.db
 │
 ├── output/
-│   ├── capital_allocation.csv
-│   └── ratio_edge_cases.log
+│   ├── screener_output.xlsx
+│   └── peer_comparison.xlsx
+│
+├── reports/
+│   └── radar_charts/
 │
 ├── src/
 │   ├── analytics/
-│   │   ├── ratios.py
-│   │   ├── cagr.py
-│   │   ├── cashflow_kpis.py
-│   │   ├── populate_financial_ratios.py
-│   │   └── ratio_edge_cases.py
-│   │
-│   ├── etl/
-│   └── database/
-│
-├── tests/
-│   ├── analytics/
+│   ├── screener/
 │   └── etl/
 │
-├── README.md
-└── requirements.txt
+├── tests/
+│
+└── README.md
 ```
 
 ---
 
-# Sprint 1 — Data Foundation
+## Features
 
-## Sprint Goal
+### Data Processing
 
-Build a clean and validated financial database for Nifty 100 companies.
+* Data ingestion
+* Data cleaning
+* Validation
+* SQLite storage
 
-### Tasks Completed
+### Financial Analytics
 
-- Environment setup
-- Project folder structure
-- Python virtual environment
-- SQLite database creation
-- ETL pipeline development
-- Data loading
-- Data normalization
-- Data validation
-- Primary key validation
-- Company-Year validation
-- SQLite schema creation
-- Loading financial statements into database
+* Profitability ratios
+* Leverage ratios
+* Efficiency ratios
+* CAGR calculations
+* Cash Flow KPIs
 
-### Database Tables
+### Stock Screener
 
-- companies
-- sectors
-- balancesheet
-- profitandloss
-- cashflow
-- stock_prices
-- peer_groups
-- documents
-- prosandcons
-- financial_ratios
+* YAML-based configurable filters
+* Six preset screeners
+* Composite quality score
+* Sector-aware filtering
+* Financial sector D/E exception
+* Debt-Free Interest Coverage handling
 
-### Sprint 1 Deliverables
+### Peer Analysis
 
-- SQLite database
-- ETL pipeline
-- Validation scripts
-- Automated tests
-- GitHub repository
+* Peer group identification
+* Percentile rankings
+* Peer comparison report
+* Radar chart visualization
 
 ---
 
-# Sprint 2 — Financial Ratio Engine
+## Outputs
 
-## Sprint Goal
+### Excel Reports
 
-Develop a Financial Ratio Engine capable of calculating financial KPIs for every company-year.
+* `output/screener_output.xlsx`
+* `output/peer_comparison.xlsx`
 
----
+### Database
 
-## Profitability Ratios
+* `financial_ratios`
+* `peer_percentiles`
 
-Implemented:
+### Visual Reports
 
-- Net Profit Margin
-- Operating Profit Margin
-- Return on Equity (ROE)
-- Return on Capital Employed (ROCE)
-- Return on Assets (ROA)
-
----
-
-## Leverage & Efficiency Ratios
-
-Implemented:
-
-- Debt-to-Equity
-- Interest Coverage Ratio
-- Net Debt
-- Asset Turnover
+* Radar charts for companies with peer groups
+* Saved under `reports/radar_charts/`
 
 ---
 
-## CAGR Engine
+## Technologies Used
 
-Implemented:
-
-- Revenue CAGR
-- PAT CAGR
-- EPS CAGR
-
-Handled Edge Cases:
-
-- Turnaround
-- Decline to Loss
-- Both Negative
-- Zero Base
-- Insufficient Data
-
----
-
-## Cash Flow KPIs
-
-Implemented:
-
-- Free Cash Flow
-- CFO Quality Score
-- CapEx Intensity
-- FCF Conversion Rate
-- Capital Allocation Classification
-
----
-
-## Database Integration
-
-Successfully integrated analytics with SQLite.
-
-Joined:
-
-- Profit & Loss
-- Balance Sheet
-- Cash Flow
-
-Generated:
-
-- financial_ratios table
-
-Verified:
-
-- 1184 company-year records
-
----
-
-## Data Validation
-
-Validated:
-
-- ROE comparison
-- ROCE comparison
-- Financial sector edge cases
-- Duplicate detection
-- Ratio anomaly detection
-
-Generated:
-
-```text
-output/
-    ratio_edge_cases.log
-```
+* Python
+* Pandas
+* NumPy
+* SQLite
+* OpenPyXL
+* Matplotlib
+* PyYAML
+* Pytest
 
 ---
 
 ## Testing
 
-All analytics modules successfully tested.
+Run the complete test suite:
 
-### Test Summary
-
-```
-47 Tests Passed
-0 Test Failures
+```bash
+python -m pytest
 ```
 
-Modules Tested
+Latest result:
 
-- Ratio Engine
-- CAGR Engine
-- Cash Flow KPIs
-- ETL Normalization
-- Data Validation
+* **47/47 tests passed**
 
 ---
 
-# Outputs
+## How to Run
 
-Generated files:
+Run the Screener Engine:
 
-- financial_ratios (SQLite)
-- ratio_edge_cases.log
-- capital_allocation.csv
+```bash
+python src/screener/engine.py
+```
 
----
+Run Peer Percentile Rankings:
 
-# Key Features
+```bash
+python src/analytics/peer.py
+```
 
-✔ Automated ETL
+Generate Radar Charts:
 
-✔ SQLite Integration
+```bash
+python src/analytics/radar.py
+```
 
-✔ Financial Ratio Engine
+Generate Peer Comparison Report:
 
-✔ CAGR Analytics
-
-✔ Cash Flow Analytics
-
-✔ Edge Case Detection
-
-✔ Automated Testing
-
-✔ Financial Data Validation
+```bash
+python src/analytics/peer_report.py
+```
 
 ---
 
-# Sprint Progress
+## Deliverables
 
-| Sprint | Status |
-|---------|--------|
-| Sprint 1 – Data Foundation | ✅ Completed |
-| Sprint 2 – Financial Ratio Engine | ✅ Completed |
-| Sprint 3 | ⏳ Upcoming |
-
----
-
-# Future Improvements
-
-- Power BI Dashboard
-- Company Screener
-- Portfolio Analytics
-- Risk Metrics
-- Interactive Visualizations
+* Financial Ratio Engine
+* Stock Screener
+* Peer Ranking Engine
+* Screener Excel Report
+* Peer Comparison Excel Report
+* Radar Charts
+* SQLite Database
+* Automated Test Suite
 
 ---
+
+## Test Status
+
+* Unit Tests Passed: **47/47**
+* Sprint 1: Completed
+* Sprint 2: Completed
+* Sprint 3: Completed
+
 
 # Author
 
