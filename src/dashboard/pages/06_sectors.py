@@ -1,4 +1,141 @@
 import streamlit as st
-
+from utils.db import run_query
 st.title("🏭 Sector Analysis")
-st.info("Sector Analysis Profile - Coming Soon")
+
+st.write("Analyze companies by sector.")
+
+sectors = run_query("""
+SELECT DISTINCT broad_sector
+FROM sectors
+ORDER BY broad_sector
+""")
+
+selected_sector = st.selectbox(
+    "Select Sector",
+    sectors["broad_sector"]
+)
+sector_companies = run_query("""
+SELECT
+    c.company_name
+FROM companies c
+JOIN sectors s
+    ON c.id = s.company_id
+WHERE s.broad_sector = ?
+ORDER BY c.company_name
+""", (selected_sector,))
+st.subheader(f"Companies in {selected_sector}")
+
+st.dataframe(
+    sector_companies,
+    use_container_width=True,
+    hide_index=True
+)
+st.metric(
+    "Total Companies",
+    len(sector_companies)
+)
+
+sector_stats = run_query("""
+SELECT
+    ROUND(AVG(f.return_on_equity_pct), 2) AS avg_roe
+FROM financial_ratios f
+JOIN sectors s
+    ON f.company_id = s.company_id
+WHERE s.broad_sector = ?
+""", (selected_sector,))
+
+st.metric(
+    "Average ROE (%)",
+    sector_stats.iloc[0]["avg_roe"]
+)
+
+sector_de = run_query("""
+SELECT
+    ROUND(AVG(f.debt_to_equity), 2) AS avg_de
+FROM financial_ratios f
+JOIN sectors s
+    ON f.company_id = s.company_id
+WHERE s.broad_sector = ?
+""", (selected_sector,))
+
+st.metric(
+    "Average Debt/Equity",
+    sector_de.iloc[0]["avg_de"]
+)
+
+
+company_roe = run_query("""
+SELECT
+    c.company_name,
+    ROUND(f.return_on_equity_pct, 2) AS ROE,
+    f.year
+FROM companies c
+JOIN financial_ratios f
+    ON c.id = f.company_id
+JOIN sectors s
+    ON c.id = s.company_id
+WHERE s.broad_sector = ?
+AND f.year = (
+    SELECT MAX(f2.year)
+    FROM financial_ratios f2
+    WHERE f2.company_id = f.company_id
+)
+ORDER BY ROE DESC
+""", (selected_sector,))
+
+st.subheader("Company-wise ROE")
+
+st.dataframe(
+    company_roe,
+    use_container_width=True,
+    hide_index=True
+)   
+
+sector_count = run_query("""
+SELECT
+    broad_sector,
+    COUNT(*) AS companies
+FROM sectors
+GROUP BY broad_sector
+ORDER BY companies DESC
+""")
+
+st.subheader("Companies per Sector")
+
+st.dataframe(
+    sector_count,
+    use_container_width=True,
+    hide_index=True
+)
+
+st.subheader("Companies by Sector")
+
+sector_chart = run_query("""
+SELECT
+    broad_sector,
+    COUNT(*) AS companies
+FROM sectors
+GROUP BY broad_sector
+ORDER BY companies DESC
+""")
+
+st.bar_chart(
+    sector_chart.set_index("broad_sector")
+)
+
+st.subheader("Average ROE by Sector")
+
+roe_chart = run_query("""
+SELECT
+    s.broad_sector,
+    ROUND(AVG(f.return_on_equity_pct), 2) AS avg_roe
+FROM sectors s
+JOIN financial_ratios f
+    ON s.company_id = f.company_id
+GROUP BY s.broad_sector
+ORDER BY avg_roe DESC
+""")
+
+st.bar_chart(
+    roe_chart.set_index("broad_sector")
+)

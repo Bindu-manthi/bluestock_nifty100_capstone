@@ -1,4 +1,7 @@
 import streamlit as st
 
-st.title("💰 Capital Allocation")
-st.info("Capital Allocation Profile - Coming Soon")
+st.title("🏦 Capital Analysis")
+
+st.info(
+    "Market capitalization data is not available in the current database."
+)

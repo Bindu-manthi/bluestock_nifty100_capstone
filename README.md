@@ -1,213 +1,342 @@
-# Nifty100 Financial Analytics & Stock Screener
+# 📊 Nifty100 Financial Analytics Dashboard
 
-## Overview
-
-This project is a financial analytics platform for Nifty 100 companies. It extracts, processes, and analyzes company financial data to generate key financial ratios, stock screeners, peer comparisons, and visual reports.
-
-The project is implemented in multiple sprints, with each sprint adding new analytical capabilities and reporting features.
+A comprehensive financial analytics project built using **Python, SQLite, Pandas, and Streamlit**. This project analyzes Nifty 100 companies by calculating financial ratios, screening companies based on investment criteria, comparing peers, visualizing trends, and presenting insights through an interactive dashboard.
 
 ---
 
-## Sprint Progress
+# 🚀 Project Overview
 
-### Sprint 1 – Data Foundation
+This project was developed in four sprints:
 
-* Project structure and environment setup
-* Data ingestion and normalization
-* SQLite database creation
-* Data validation pipeline
-* ETL workflow
-
-### Sprint 2 – Financial Ratio Engine
-
-* Profitability ratios
-* Leverage ratios
-* Efficiency ratios
-* CAGR calculations
-* Cash Flow KPIs
-* Financial ratio population
-* Edge case validation
-* Unit testing
-
-### Sprint 3 – Screener & Peer Engine
-
-* Configurable stock screener
-* Six preset screeners
-* Composite quality scoring
-* Excel screener export
-* Peer percentile ranking engine
-* SQLite peer percentile storage
-* Radar chart generation
-* Peer comparison Excel report
+- **Sprint 1:** Data Ingestion & ETL Pipeline
+- **Sprint 2:** Financial Ratio & Analytics Engine
+- **Sprint 3:** Screener & Peer Comparison Engine
+- **Sprint 4:** Interactive Streamlit Dashboard
 
 ---
 
-## Project Structure
+# 📌 Sprint 1 – Data Engineering
+
+### Objectives
+
+- Build ETL pipeline
+- Load Nifty100 company data
+- Store cleaned data in SQLite
+- Normalize financial statements
+
+### Completed
+
+- Company master data
+- Profit & Loss data
+- Balance Sheet data
+- Cash Flow data
+- Documents
+- Stock Prices
+- Peer Groups
+- Sectors
+- Database validation
+- Data cleaning
+- Automated ETL pipeline
+
+---
+
+# 📌 Sprint 2 – Financial Analytics Engine
+
+### Objectives
+
+Calculate important financial metrics.
+
+### Implemented KPIs
+
+- Return on Equity (ROE)
+- Return on Assets (ROA)
+- Debt to Equity
+- Operating Profit Margin
+- Net Profit Margin
+- Interest Coverage
+- Asset Turnover
+- Free Cash Flow
+- Book Value Per Share
+- Earnings Per Share (EPS)
+- Cash From Operations
+- Total Debt
+- Revenue CAGR
+- Profit CAGR
+- EPS CAGR
+
+### Output
+
+- Financial ratios stored in SQLite
+- Analytics module completed
+- Automated calculations
+
+---
+
+# 📌 Sprint 3 – Screener & Peer Comparison
+
+### Financial Screener
+
+Implemented predefined screeners:
+
+- Quality Compounder
+- Growth Stocks
+- Value Picks
+- Dividend Stocks
+- Debt Free Companies
+- Custom Filters
+
+### Peer Comparison
+
+Compare companies within the same sector using:
+
+- ROE
+- Debt to Equity
+- Free Cash Flow
+- Operating Margin
+- Interest Coverage
+- Asset Turnover
+
+### Outputs
+
+- Peer Rankings
+- Company Comparison Tables
+- Sector-based analysis
+
+---
+
+# 📌 Sprint 4 – Streamlit Dashboard
+
+Built an interactive dashboard using Streamlit.
+
+### Dashboard Pages
+
+### 🏠 Home
+
+- Overall dashboard
+- Company statistics
+- Summary metrics
+
+### 👤 Company Profile
+
+- Company information
+- Financial overview
+
+### 🔍 Screener
+
+- Apply predefined filters
+- View screened companies
+
+### 📊 Peer Comparison
+
+- Compare companies
+- Benchmark analysis
+- Financial metrics
+
+### 📈 Trend Analysis
+
+Historical visualization of
+
+- Revenue
+- Net Profit
+- ROE
+- Free Cash Flow
+
+### 🏭 Sector Analysis
+
+- Sector selection
+- Company listing
+- Total companies
+- Average ROE
+- Average Debt/Equity
+- Company-wise ROE
+- Sector comparison charts
+
+### 📄 Reports
+
+- Financial summary
+- Company information
+- CSV download
+
+> **Note:** A Valuation page (P/E, P/B, Market Cap, Dividend Yield) was planned, but the current SQLite database does not contain the required valuation tables/columns, so it was not implemented.
+
+---
+
+# 🗂 Project Structure
 
 ```text
 nifty100_capstone/
 │
-├── config/
-│   └── screener_config.yaml
-│
-├── db/
+├── data/
 │   └── nifty100.db
-│
-├── output/
-│   ├── screener_output.xlsx
-│   └── peer_comparison.xlsx
-│
-├── reports/
-│   └── radar_charts/
 │
 ├── src/
 │   ├── analytics/
+│   ├── dashboard/
+│   │   ├── app.py
+│   │   ├── pages/
+│   │   │   ├── 01_home.py
+│   │   │   ├── 02_profile.py
+│   │   │   ├── 03_screener.py
+│   │   │   ├── 04_peer_comparison.py
+│   │   │   ├── 05_trends.py
+│   │   │   ├── 06_sectors.py
+│   │   │   ├── 07_capital.py (placeholder)
+│   │   │   └── 08_reports.py
+│   │   └── utils/
+│   │       └── db.py
+│   │
+│   ├── etl/
 │   ├── screener/
-│   └── etl/
+│   └── valuation/
 │
 ├── tests/
-│
+├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## Features
+# 🛠 Technologies Used
 
-### Data Processing
-
-* Data ingestion
-* Data cleaning
-* Validation
-* SQLite storage
-
-### Financial Analytics
-
-* Profitability ratios
-* Leverage ratios
-* Efficiency ratios
-* CAGR calculations
-* Cash Flow KPIs
-
-### Stock Screener
-
-* YAML-based configurable filters
-* Six preset screeners
-* Composite quality score
-* Sector-aware filtering
-* Financial sector D/E exception
-* Debt-Free Interest Coverage handling
-
-### Peer Analysis
-
-* Peer group identification
-* Percentile rankings
-* Peer comparison report
-* Radar chart visualization
+- Python 3.13
+- Pandas
+- NumPy
+- SQLite
+- Streamlit
+- Matplotlib
+- Plotly
+- Pytest
+- Git
+- GitHub
 
 ---
 
-## Outputs
+# ▶️ Installation
 
-### Excel Reports
+Clone the repository
 
-* `output/screener_output.xlsx`
-* `output/peer_comparison.xlsx`
+```bash
+git clone <repository-url>
+```
 
-### Database
+Move into the project
 
-* `financial_ratios`
-* `peer_percentiles`
+```bash
+cd nifty100_capstone
+```
 
-### Visual Reports
+Create virtual environment
 
-* Radar charts for companies with peer groups
-* Saved under `reports/radar_charts/`
+```bash
+python -m venv venv
+```
+
+Activate environment
+
+Windows
+
+```bash
+venv\Scripts\activate
+```
+
+Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the dashboard
+
+```bash
+streamlit run src/dashboard/app.py
+```
 
 ---
 
-## Technologies Used
-
-* Python
-* Pandas
-* NumPy
-* SQLite
-* OpenPyXL
-* Matplotlib
-* PyYAML
-* Pytest
-
----
-
-## Testing
-
-Run the complete test suite:
+# ✅ Running Tests
 
 ```bash
 python -m pytest
 ```
 
-Latest result:
+Latest Result
 
-* **47/47 tests passed**
-
----
-
-## How to Run
-
-Run the Screener Engine:
-
-```bash
-python src/screener/engine.py
-```
-
-Run Peer Percentile Rankings:
-
-```bash
-python src/analytics/peer.py
-```
-
-Generate Radar Charts:
-
-```bash
-python src/analytics/radar.py
-```
-
-Generate Peer Comparison Report:
-
-```bash
-python src/analytics/peer_report.py
+```text
+47 passed in 2.48s
 ```
 
 ---
 
-## Deliverables
+# 📊 Database
 
-* Financial Ratio Engine
-* Stock Screener
-* Peer Ranking Engine
-* Screener Excel Report
-* Peer Comparison Excel Report
-* Radar Charts
-* SQLite Database
-* Automated Test Suite
+SQLite database contains:
+
+- companies
+- profitandloss
+- balancesheet
+- cashflow
+- financial_ratios
+- stock_prices
+- sectors
+- peer_groups
+- peer_percentiles
+- prosandcons
+- documents
+- analysis
 
 ---
 
-## Test Status
+# ✨ Key Features
 
-* Unit Tests Passed: **47/47**
-* Sprint 1: Completed
-* Sprint 2: Completed
-* Sprint 3: Completed
+- Financial Ratio Calculation
+- Automated ETL
+- SQLite Database
+- Company Screener
+- Peer Comparison
+- Trend Analysis
+- Sector Analytics
+- Interactive Dashboard
+- CSV Report Download
+- Unit Tested Code
+- Modular Architecture
 
+---
 
-# Author
+# 📈 Future Enhancements
+
+- Valuation Module (P/E, P/B, Market Cap)
+- Live Stock Price Integration
+- Portfolio Tracking
+- Watchlist
+- PDF Report Export
+- Authentication
+- Cloud Deployment
+
+---
+
+# 👨‍💻 Author
 
 **Bindu Madhavi Manthi**
 
+**MCA Graduate**
+
 Python Developer | Data Analyst
 
-GitHub:
-https://github.com/Bindu-manthi
+GitHub: https://github.com/Bindu-manthi
+
+
+
+---
+
+# ⭐ Project Status
+
+**Completed**
+
+- ✅ Sprint 1
+- ✅ Sprint 2
+- ✅ Sprint 3
+- ✅ Sprint 4
+
+**All automated tests passing (47/47).**
+
 
