@@ -143,6 +143,7 @@ if not pl.empty:
 # -----------------------------
 
 if not ratios.empty:
+    
 
     st.divider()
 

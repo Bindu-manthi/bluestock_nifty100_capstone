@@ -39,11 +39,14 @@ ORDER BY c.company_name
 
 st.subheader("Companies in this Peer Group")
 
-st.dataframe(
-    companies,
-    use_container_width=True,
-    hide_index=True
-)
+if companies.empty:
+    st.warning("No companies found in this peer group.")
+else:
+    st.dataframe(
+        companies,
+        use_container_width=True,
+        hide_index=True
+    )
 
 # ---------------------------------
 # Peer Comparison Metrics
@@ -96,11 +99,14 @@ comparison = comparison[
 
 st.subheader("📊 Financial Comparison")
 
-st.dataframe(
-    comparison,
-    use_container_width=True,
-    hide_index=True
-)
+if comparison.empty:
+    st.warning("No financial comparison data available.")
+else:
+    st.dataframe(
+        comparison,
+        use_container_width=True,
+        hide_index=True
+    )
 
 
 
@@ -108,7 +114,10 @@ st.dataframe(
 # Radar Chart
 # ---------------------------------
 
-if not comparison.empty:
+if (
+    not comparison.empty
+    and len(comparison) >= 2
+):
 
     radar_df = comparison.melt(
         id_vars="company_name",

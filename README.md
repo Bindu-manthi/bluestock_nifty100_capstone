@@ -1,173 +1,48 @@
-# 📊 Nifty100 Financial Analytics Dashboard
+# 📈 Nifty100 Analytics Dashboard
 
-A comprehensive financial analytics project built using **Python, SQLite, Pandas, and Streamlit**. This project analyzes Nifty 100 companies by calculating financial ratios, screening companies based on investment criteria, comparing peers, visualizing trends, and presenting insights through an interactive dashboard.
-
----
-
-# 🚀 Project Overview
-
-This project was developed in four sprints:
-
-- **Sprint 1:** Data Ingestion & ETL Pipeline
-- **Sprint 2:** Financial Ratio & Analytics Engine
-- **Sprint 3:** Screener & Peer Comparison Engine
-- **Sprint 4:** Interactive Streamlit Dashboard
+A comprehensive financial analytics dashboard built using **Python, Streamlit, SQLite, Pandas, and Plotly** for analyzing Nifty 100 companies. The project provides company insights, financial screening, peer comparison, sector analysis, trend visualization, and report generation through an interactive web dashboard.
 
 ---
 
-# 📌 Sprint 1 – Data Engineering
+# 🚀 Features
 
-### Objectives
-
-- Build ETL pipeline
-- Load Nifty100 company data
-- Store cleaned data in SQLite
-- Normalize financial statements
-
-### Completed
-
-- Company master data
-- Profit & Loss data
-- Balance Sheet data
-- Cash Flow data
-- Documents
-- Stock Prices
-- Peer Groups
-- Sectors
-- Database validation
-- Data cleaning
-- Automated ETL pipeline
+- Company Financial Profile
+- Financial Screener
+- Peer Comparison
+- Trend Analysis
+- Sector Analysis
+- Capital Analysis
+- Report Generation
+- Interactive Charts
+- SQLite Database Integration
+- CSV Export Support
 
 ---
 
-# 📌 Sprint 2 – Financial Analytics Engine
+# 🛠 Tech Stack
 
-### Objectives
-
-Calculate important financial metrics.
-
-### Implemented KPIs
-
-- Return on Equity (ROE)
-- Return on Assets (ROA)
-- Debt to Equity
-- Operating Profit Margin
-- Net Profit Margin
-- Interest Coverage
-- Asset Turnover
-- Free Cash Flow
-- Book Value Per Share
-- Earnings Per Share (EPS)
-- Cash From Operations
-- Total Debt
-- Revenue CAGR
-- Profit CAGR
-- EPS CAGR
-
-### Output
-
-- Financial ratios stored in SQLite
-- Analytics module completed
-- Automated calculations
+- Python 3.13
+- Streamlit
+- Pandas
+- Plotly
+- SQLite
+- SQLAlchemy
+- OpenPyXL
+- Pytest
 
 ---
 
-# 📌 Sprint 3 – Screener & Peer Comparison
+# 📂 Project Structure
 
-### Financial Screener
-
-Implemented predefined screeners:
-
-- Quality Compounder
-- Growth Stocks
-- Value Picks
-- Dividend Stocks
-- Debt Free Companies
-- Custom Filters
-
-### Peer Comparison
-
-Compare companies within the same sector using:
-
-- ROE
-- Debt to Equity
-- Free Cash Flow
-- Operating Margin
-- Interest Coverage
-- Asset Turnover
-
-### Outputs
-
-- Peer Rankings
-- Company Comparison Tables
-- Sector-based analysis
-
----
-
-# 📌 Sprint 4 – Streamlit Dashboard
-
-Built an interactive dashboard using Streamlit.
-
-### Dashboard Pages
-
-### 🏠 Home
-
-- Overall dashboard
-- Company statistics
-- Summary metrics
-
-### 👤 Company Profile
-
-- Company information
-- Financial overview
-
-### 🔍 Screener
-
-- Apply predefined filters
-- View screened companies
-
-### 📊 Peer Comparison
-
-- Compare companies
-- Benchmark analysis
-- Financial metrics
-
-### 📈 Trend Analysis
-
-Historical visualization of
-
-- Revenue
-- Net Profit
-- ROE
-- Free Cash Flow
-
-### 🏭 Sector Analysis
-
-- Sector selection
-- Company listing
-- Total companies
-- Average ROE
-- Average Debt/Equity
-- Company-wise ROE
-- Sector comparison charts
-
-### 📄 Reports
-
-- Financial summary
-- Company information
-- CSV download
-
-> **Note:** A Valuation page (P/E, P/B, Market Cap, Dividend Yield) was planned, but the current SQLite database does not contain the required valuation tables/columns, so it was not implemented.
-
----
-
-# 🗂 Project Structure
-
-```text
+```
 nifty100_capstone/
 │
 ├── data/
+│
+├── db/
 │   └── nifty100.db
+│
+├── output/
 │
 ├── src/
 │   ├── analytics/
@@ -177,67 +52,130 @@ nifty100_capstone/
 │   │   │   ├── 01_home.py
 │   │   │   ├── 02_profile.py
 │   │   │   ├── 03_screener.py
-│   │   │   ├── 04_peer_comparison.py
+│   │   │   ├── 04_peers.py
 │   │   │   ├── 05_trends.py
 │   │   │   ├── 06_sectors.py
-│   │   │   ├── 07_capital.py (placeholder)
+│   │   │   ├── 07_capital.py
 │   │   │   └── 08_reports.py
 │   │   └── utils/
 │   │       └── db.py
 │   │
 │   ├── etl/
-│   ├── screener/
-│   └── valuation/
+│   └── screener/
 │
 ├── tests/
+│
 ├── requirements.txt
-└── README.md
+├── README.md
+└── run_pipeline.py
 ```
 
 ---
 
-# 🛠 Technologies Used
+# 📊 Dashboard Modules
 
-- Python 3.13
-- Pandas
-- NumPy
-- SQLite
-- Streamlit
-- Matplotlib
-- Plotly
-- Pytest
-- Git
-- GitHub
+## 🏠 Home
+
+- Project Overview
+- Database Summary
+- KPI Cards
+- Company Statistics
 
 ---
 
-# ▶️ Installation
+## 👤 Company Profile
 
-Clone the repository
+- Company Information
+- Financial Overview
+- ROE Trend
+- Business Summary
+
+---
+
+## 🔍 Financial Screener
+
+Filter companies using financial metrics like:
+
+- ROE
+- Debt to Equity
+- Revenue Growth
+- Free Cash Flow
+- Market Capitalization
+- Net Profit
+
+---
+
+## 🤝 Peer Comparison
+
+Compare companies within the same peer group.
+
+Includes:
+
+- Financial Metrics
+- Benchmark Identification
+- Radar Chart Comparison
+
+---
+
+## 📈 Trend Analysis
+
+Historical analysis for:
+
+- Sales
+- Net Profit
+- ROE
+- Free Cash Flow
+
+Interactive visualizations help identify long-term performance.
+
+---
+
+## 🏭 Sector Analysis
+
+- Companies by Sector
+- Sector-wise Performance
+- Average Financial Metrics
+- Interactive Charts
+
+---
+
+## 💰 Capital Analysis
+
+Displays available capital-related financial information from the project database.
+
+---
+
+## 📄 Reports
+
+Generate company reports including:
+
+- Financial Summary
+- Company Details
+- Key Metrics
+- ROE Trend
+- CSV Download
+
+---
+
+# 🧪 Testing
+
+The project includes automated unit tests.
+
+Run:
 
 ```bash
-git clone <repository-url>
+python -m pytest
 ```
 
-Move into the project
+Result:
 
-```bash
-cd nifty100_capstone
+```
+47 passed
 ```
 
-Create virtual environment
+---
 
-```bash
-python -m venv venv
-```
-
-Activate environment
-
-Windows
-
-```bash
-venv\Scripts\activate
-```
+# ▶️ Run Dashboard
 
 Install dependencies
 
@@ -245,24 +183,10 @@ Install dependencies
 pip install -r requirements.txt
 ```
 
-Run the dashboard
+Launch Streamlit
 
 ```bash
 streamlit run src/dashboard/app.py
-```
-
----
-
-# ✅ Running Tests
-
-```bash
-python -m pytest
-```
-
-Latest Result
-
-```text
-47 passed in 2.48s
 ```
 
 ---
@@ -272,71 +196,51 @@ Latest Result
 SQLite database contains:
 
 - companies
-- profitandloss
+- stock_prices
 - balancesheet
+- profitandloss
 - cashflow
 - financial_ratios
-- stock_prices
-- sectors
 - peer_groups
 - peer_percentiles
-- prosandcons
-- documents
+- sectors
 - analysis
+- documents
 
 ---
 
-# ✨ Key Features
+# ✅ Key Highlights
 
-- Financial Ratio Calculation
-- Automated ETL
-- SQLite Database
-- Company Screener
-- Peer Comparison
-- Trend Analysis
-- Sector Analytics
-- Interactive Dashboard
-- CSV Report Download
-- Unit Tested Code
-- Modular Architecture
+- Interactive Financial Dashboard
+- Financial Ratio Analytics
+- Company Screening Engine
+- Peer Benchmarking
+- Sector Insights
+- Trend Visualization
+- Report Generation
+- SQLite Integration
+- Fully Tested Application
 
 ---
 
-# 📈 Future Enhancements
+# 🧪 Test Status
 
-- Valuation Module (P/E, P/B, Market Cap)
-- Live Stock Price Integration
-- Portfolio Tracking
-- Watchlist
-- PDF Report Export
-- Authentication
-- Cloud Deployment
+```
+47 / 47 Tests Passed
+```
 
 ---
 
-# 👨‍💻 Author
+# 👩‍💻 Developed By
 
 **Bindu Madhavi Manthi**
 
-**MCA Graduate**
+MCA Graduate
 
-Python Developer | Data Analyst
-
-GitHub: https://github.com/Bindu-manthi
-
-
+Python Developer | Django | SQL | Data Analytics
 
 ---
 
-# ⭐ Project Status
+# 📜 License
 
-**Completed**
-
-- ✅ Sprint 1
-- ✅ Sprint 2
-- ✅ Sprint 3
-- ✅ Sprint 4
-
-**All automated tests passing (47/47).**
-
-
+This project was developed as part of a Financial Analytics Capstone for educational purposes.

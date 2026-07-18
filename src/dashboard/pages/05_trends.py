@@ -28,8 +28,7 @@ company_id = companies.loc[
     "id"
 ].iloc[0] 
 
-st.success(f"Selected Company: {selected_company}")
-
+st.caption(f"Selected Company: {selected_company}")
 
 # ---------------------------------
 # Load Historical Financial Data
@@ -49,6 +48,11 @@ JOIN financial_ratios f
 WHERE p.company_id = ?
 ORDER BY p.year
 """, (company_id,))
+
+if trend_data.empty:
+    st.warning("No historical financial data available.")
+    st.stop()
+    trend_data = trend_data.sort_values("year")
 
 st.subheader("Historical Financial Data")
 

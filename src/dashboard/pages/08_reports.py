@@ -1,8 +1,13 @@
 import streamlit as st
 from utils.db import run_query
-st.title("📄 Reports")
 
+st.title("📄 Reports")
 st.write("Generate and view company reports.")
+
+# ---------------------------------
+# Company List
+# ---------------------------------
+
 companies = run_query("""
 SELECT
     company_name,
@@ -10,6 +15,10 @@ SELECT
 FROM companies
 ORDER BY company_name
 """)
+
+if companies.empty:
+    st.warning("No companies found.")
+    st.stop()
 
 selected_company = st.selectbox(
     "Select Company",
@@ -21,82 +30,106 @@ company_id = companies.loc[
     "id"
 ].iloc[0]
 
+# ---------------------------------
+# Company Information
+# ---------------------------------
+
 company_info = run_query("""
 SELECT
     c.company_name,
     s.broad_sector
 FROM companies c
 LEFT JOIN sectors s
-    ON c.id = s.company_id
+ON c.id = s.company_id
 WHERE c.id = ?
 """, (company_id,))
 
 st.subheader("Company Information")
 
-st.dataframe(
-    company_info,
-    use_container_width=True,
-    hide_index=True
-)
+if company_info.empty:
+    st.info("No company information available.")
+else:
+    st.dataframe(
+        company_info,
+        use_container_width=True,
+        hide_index=True
+    )
+
+# ---------------------------------
+# Financial Summary
+# ---------------------------------
 
 financial_summary = run_query("""
 SELECT
     year,
-    return_on_equity_pct,
-    debt_to_equity,
-    free_cash_flow_cr
+    MAX(return_on_equity_pct) AS return_on_equity_pct,
+    MAX(debt_to_equity) AS debt_to_equity,
+    MAX(free_cash_flow_cr) AS free_cash_flow_cr
 FROM financial_ratios
 WHERE company_id = ?
+GROUP BY year
 ORDER BY year DESC
 LIMIT 10
 """, (company_id,))
 
-
 st.subheader("Financial Summary")
 
 if financial_summary.empty:
-    st.warning("No data available.")
+
+    st.warning("No financial data available.")
+
 else:
+
     st.dataframe(
         financial_summary,
         use_container_width=True,
         hide_index=True
     )
-    
-csv = financial_summary.to_csv(index=False).encode("utf-8")
 
-st.subheader("Summary Statistics")
+    # -----------------------------
+    # Summary Statistics
+    # -----------------------------
 
-col1, col2, col3 = st.columns(3)
+    st.subheader("Summary Statistics")
 
-col1.metric(
-    "Records",
-    len(financial_summary)
-)
+    col1, col2, col3 = st.columns(3)
 
-col2.metric(
-    "Latest ROE",
-    financial_summary.iloc[0]["return_on_equity_pct"]
-)
+    col1.metric(
+        "Records",
+        len(financial_summary)
+    )
 
-col3.metric(
-    "Latest Debt/Equity",
-    financial_summary.iloc[0]["debt_to_equity"]
-)
+    col2.metric(
+        "Latest ROE",
+        round(float(financial_summary.iloc[0]["return_on_equity_pct"]), 2)
+    )
 
-st.subheader("ROE Trend")
+    col3.metric(
+        "Latest Debt / Equity",
+        round(float(financial_summary.iloc[0]["debt_to_equity"]), 2)
+    )
 
-chart = financial_summary.copy()
+    # -----------------------------
+    # ROE Trend
+    # -----------------------------
 
-chart = chart.sort_values("year")
+    st.subheader("ROE Trend")
 
-st.line_chart(
-    chart.set_index("year")["return_on_equity_pct"]
-)
+    chart = financial_summary.sort_values("year")
 
-st.download_button(
-    label="📥 Download Financial Summary (CSV)",
-    data=csv,
-    file_name=f"{selected_company}_financial_summary.csv",
-    mime="text/csv"
-)
+    st.line_chart(
+        chart.set_index("year")["return_on_equity_pct"]
+    )
+
+    # -----------------------------
+    # CSV Download
+    # -----------------------------
+
+    csv = financial_summary.to_csv(index=False).encode("utf-8")
+
+    st.download_button(
+        label="📥 Download Financial Summary (CSV)",
+        data=csv,
+        file_name=f"{selected_company}_financial_summary.csv",
+        mime="text/csv"
+    )

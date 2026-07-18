@@ -114,21 +114,25 @@ result = run_query(
 
 st.subheader(f"📈 Companies Found: {len(result)}")
 
-st.dataframe(
-    result,
-    use_container_width=True,
-    hide_index=True
-)
+if result.empty:
+    st.warning("No companies match the selected filters.")
+else:
+    st.dataframe(
+        result,
+        use_container_width=True,
+        hide_index=True
+    )
 
 # ---------------------------------
 # CSV Download
 # ---------------------------------
 
-csv = result.to_csv(index=False).encode("utf-8")
+if not result.empty:
+    csv = result.to_csv(index=False).encode("utf-8")
 
-st.download_button(
-    label="📥 Download Results as CSV",
-    data=csv,
-    file_name="screener_results.csv",
-    mime="text/csv"
-)
+    st.download_button(
+        label="📥 Download Results as CSV",
+        data=csv,
+        file_name="screener_results.csv",
+        mime="text/csv"
+    )
