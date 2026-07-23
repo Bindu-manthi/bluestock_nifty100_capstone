@@ -1,6 +1,6 @@
-# 📈 Nifty100 Analytics Dashboard
+# 📈 NIFTY100 Financial Intelligence Platform
 
-A comprehensive financial analytics dashboard built using **Python, Streamlit, SQLite, Pandas, and Plotly** for analyzing Nifty 100 companies. The project provides company insights, financial screening, peer comparison, sector analysis, trend visualization, and report generation through an interactive web dashboard.
+A comprehensive financial intelligence platform built using **Python, Streamlit, SQLite, Pandas, Plotly, and SQLAlchemy** for analyzing NIFTY100 companies. The platform provides financial analytics, company screening, peer comparison, trend analysis, sector insights, automated reporting, and NLP-based financial intelligence through an interactive dashboard.
 
 ---
 
@@ -13,6 +13,11 @@ A comprehensive financial analytics dashboard built using **Python, Streamlit, S
 - Sector Analysis
 - Capital Analysis
 - Report Generation
+- Financial Ratio Analytics
+- Executive Summary Generation
+- Company Scorecards
+- Dashboard Dataset Generation
+- NLP-based Financial Narratives
 - Interactive Charts
 - SQLite Database Integration
 - CSV Export Support
@@ -34,7 +39,7 @@ A comprehensive financial analytics dashboard built using **Python, Streamlit, S
 
 # 📂 Project Structure
 
-```
+```text
 nifty100_capstone/
 │
 ├── data/
@@ -60,8 +65,10 @@ nifty100_capstone/
 │   │   └── utils/
 │   │       └── db.py
 │   │
+│   ├── analytics/
 │   ├── etl/
-│   └── screener/
+│   ├── screener/
+│   └── nlp/
 │
 ├── tests/
 │
@@ -96,8 +103,8 @@ nifty100_capstone/
 
 Filter companies using financial metrics like:
 
-- ROE
-- Debt to Equity
+- Return on Equity (ROE)
+- Debt to Equity Ratio
 - Revenue Growth
 - Free Cash Flow
 - Market Capitalization
@@ -112,8 +119,8 @@ Compare companies within the same peer group.
 Includes:
 
 - Financial Metrics
-- Benchmark Identification
-- Radar Chart Comparison
+- Peer Benchmarking
+- Comparative Analysis
 
 ---
 
@@ -121,12 +128,12 @@ Includes:
 
 Historical analysis for:
 
-- Sales
+- Revenue
 - Net Profit
 - ROE
 - Free Cash Flow
 
-Interactive visualizations help identify long-term performance.
+Interactive visualizations help identify long-term business performance.
 
 ---
 
@@ -141,7 +148,7 @@ Interactive visualizations help identify long-term performance.
 
 ## 💰 Capital Analysis
 
-Displays available capital-related financial information from the project database.
+Displays capital allocation and capital structure information using financial database records.
 
 ---
 
@@ -151,49 +158,140 @@ Generate company reports including:
 
 - Financial Summary
 - Company Details
-- Key Metrics
+- Key Financial Metrics
 - ROE Trend
-- CSV Download
+- CSV Export
 
 ---
 
-# 🧪 Testing
+# 🚀 Project Development Timeline
 
-The project includes automated unit tests.
+## ✅ Sprint 1 – Data Foundation (Days 1–7)
 
-Run:
+### Goal
 
-```bash
-python -m pytest
-```
+Build a reliable financial database by loading, validating, and storing NIFTY100 financial statements.
 
-Result:
+### Completed
 
-```
-47 passed
-```
+- Python project setup
+- Virtual environment configuration
+- Excel data ingestion
+- Data normalization
+- SQLite schema creation
+- ETL pipeline
+- Data validation framework
+
+### Deliverables
+
+- SQLite Database
+- ETL Modules
+- Data Validation Engine
 
 ---
 
-# ▶️ Run Dashboard
+## ✅ Sprint 2 – Financial Ratio Engine (Days 8–14)
 
-Install dependencies
+### Goal
 
-```bash
-pip install -r requirements.txt
-```
+Develop a financial analytics engine capable of calculating key financial ratios and KPIs.
 
-Launch Streamlit
+### Completed
 
-```bash
-streamlit run src/dashboard/app.py
-```
+- Profitability Ratios
+- Liquidity Ratios
+- Leverage Ratios
+- Efficiency Ratios
+- CAGR Engine
+- Cash Flow KPI Engine
+- Financial Ratio Population
+
+### Deliverables
+
+- 50+ Financial KPIs
+- Financial Ratio Engine
+- Automated KPI Calculations
+
+---
+
+## ✅ Sprint 3 – Financial Screener & Peer Comparison (Days 15–21)
+
+### Goal
+
+Develop intelligent company screening and peer comparison capabilities.
+
+### Completed
+
+- Financial Screener Engine
+- Preset Screeners
+- Custom Filters
+- Peer Ranking Engine
+- Benchmark Analysis
+
+### Deliverables
+
+- Company Screening Engine
+- Peer Comparison Module
+- Percentile Ranking System
+
+---
+
+## ✅ Sprint 4 – Dashboard & Visualization (Days 22–28)
+
+### Goal
+
+Build an interactive Streamlit dashboard for financial analysis and visualization.
+
+### Completed
+
+- Home Dashboard
+- Company Profile Page
+- Financial Screener UI
+- Peer Comparison Dashboard
+- Trend Analysis
+- Sector Analysis
+- Capital Analysis
+- Report Module
+
+### Deliverables
+
+- Interactive Dashboard
+- Data Visualizations
+- CSV Export Support
+
+---
+
+## ✅ Sprint 5 – NLP Financial Intelligence (Days 29–35)
+
+### Goal
+
+Generate automated financial narratives, reports, scorecards, and executive summaries using NLP and rule-based analytics.
+
+### Completed
+
+- Financial Data Parser
+- CAGR Validation Engine
+- Company Narrative Generator
+- Financial Insight Generator
+- Company Report Generator
+- Company Scorecard Generator
+- Dashboard Dataset Generator
+- Executive Summary Generator
+
+### Deliverables
+
+- Company Narratives
+- Financial Insights
+- Company Reports
+- Investment Scorecards
+- Dashboard Dataset
+- Executive Summaries
 
 ---
 
 # 📊 Database
 
-SQLite database contains:
+SQLite database includes:
 
 - companies
 - stock_prices
@@ -209,25 +307,73 @@ SQLite database contains:
 
 ---
 
-# ✅ Key Highlights
+# 📁 Generated Outputs
 
-- Interactive Financial Dashboard
-- Financial Ratio Analytics
-- Company Screening Engine
-- Peer Benchmarking
-- Sector Insights
-- Trend Visualization
-- Report Generation
-- SQLite Integration
-- Fully Tested Application
+```text
+output/
+├── analysis_parsed.csv
+├── parse_failures.csv
+├── cagr_divergence_review.csv
+├── company_narratives.csv
+├── company_insights.csv
+├── company_reports.csv
+├── company_scorecards.csv
+├── dashboard_dataset.csv
+└── executive_summaries.csv
+```
 
 ---
 
-# 🧪 Test Status
+# 🧪 Testing
 
+Run the automated test suite:
+
+```bash
+python -m pytest
 ```
+
+### Result
+
+```text
 47 / 47 Tests Passed
 ```
+
+---
+
+# ▶️ Run the Application
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Launch the Streamlit dashboard:
+
+```bash
+streamlit run src/dashboard/app.py
+```
+
+---
+
+# ✅ Key Highlights
+
+- Interactive Financial Intelligence Dashboard
+- Automated ETL Pipeline
+- SQLite Database Integration
+- Financial Ratio Analytics (50+ KPIs)
+- Financial Screening Engine
+- Peer Benchmarking
+- Sector Performance Analysis
+- Trend Visualization
+- Company Report Generation
+- NLP-based Financial Narratives
+- Financial Insight Generation
+- Executive Summary Generation
+- Investment Recommendation Engine
+- Dashboard-ready Dataset Generation
+- CSV Export Support
+- Fully Tested Application (47/47 Tests Passed)
 
 ---
 
@@ -243,4 +389,4 @@ Python Developer | Django | SQL | Data Analytics
 
 # 📜 License
 
-This project was developed as part of a Financial Analytics Capstone for educational purposes.
+This project was developed as part of a **Financial Analytics Capstone Project** for educational and learning purposes.
